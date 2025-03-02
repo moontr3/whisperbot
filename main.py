@@ -170,8 +170,10 @@ async def send_whisper(inter: discord.Interaction):
     name='read',
     description='Read whisper'
 )
+@discord.app_commands.user_install()
 async def slash_read_whisper(inter:discord.Interaction, message_id: str):
     whisper = mg.get_whisper(int(message_id))
+
     if whisper == None:
         embed = discord.Embed(
             color=discord.Color.red(),
@@ -187,7 +189,8 @@ async def slash_read_whisper(inter:discord.Interaction, message_id: str):
             color=discord.Color.red(),
             description='**You are not meant to view this whisper!**'
         )
-    await inter.response.send_message(embed=embed,ephemeral=True) 
+
+    await inter.response.send_message(embed=embed, ephemeral=True) 
 
 ## RUNNING BOT
 bot.run(TOKEN)
